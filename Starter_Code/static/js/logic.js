@@ -11,7 +11,6 @@ var myMap = L.map("map", {
   });
   
   // Adding tile layers
-
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
   }).addTo(myMap);
@@ -21,16 +20,17 @@ var myMap = L.map("map", {
   }).addTo(myMap);
 
 
-
-
-// Perform a GET request to the query URL/
+// Perform a GET request to the query URL/      
 d3.json(queryUrl).then(function(data) {
     // console.log(data)
 
-    // Plot all the earthquakes from your dataset based on their longitude and latitude
-    var earthquakes = L.layerGroup();
-
-
+    let earthquake=data[i];
+  
+    // Add circles to the map.
+    L.circle(data.geometry,{
+      'radius': Math.sqrt(data.geometry,)*500
+    }).addTo(myMap);
+});
 
     // Your data markers should reflect the magnitude of the earthquake by their size and the depth of the earthquake by color. 
     // Earthquakes with higher magnitudes should appear larger, and earthquakes with greater depth should appear darker in color.
@@ -45,24 +45,24 @@ d3.json(queryUrl).then(function(data) {
 
     // Create a legend that will provide context for your map data
 
-});
 
 
 
-// Create the map
-function createMap(earthquakes){ 
+
+// // Create the map
+// function createMap(earthquakes){ 
 
 
-    // Create a baseMaps object.
-    var baseMaps = {
-      "Street Map": street,
-      "Topographic Map": topo
-    };
+//     // Create a baseMaps object.
+//     var baseMaps = {
+//       "Street Map": street,
+//       "Topographic Map": topo
+//     };
   
-    // Create an overlay object to hold our overlay.
-    var overlayMaps = {
-      Earthquakes: earthquakes
-    };
+//     // Create an overlay object to hold our overlay.
+//     var overlayMaps = {
+//       Earthquakes: earthquakes
+//     };
   
     // Create our map, giving it the streetmap and earthquakes layers to display on load.
 
@@ -104,6 +104,4 @@ function createMap(earthquakes){
 //   // Create a layer control.
 //   // Pass it our baseMaps and overlayMaps.
   // Add the layer control to the map.
-  L.control.layers(baseMaps, overlayMaps).addTo(myMap);
- 
-} 
+//   L.control.layers(baseMaps, overlayMaps).addTo(myMap);
