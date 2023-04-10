@@ -85,28 +85,27 @@ function createFeatures(earthquakeData) {
 
 // Create a legend to provide context for the map data.
 var legend = L.control({ position: "bottomright" });
+
   legend.onAdd = function() {
     var div = L.DomUtil.create("div", "info legend");
-    var depths = [-10, 10, 30,50, 70, 90];
-    var colors = ['#C0392B', '#EC7C3C','#F39C12','#F1C40F','#2ECC71', '#1E8449']
+    var depths = ['-10-10', '10-30', '30-50', '50-70', '70-90', '90+'];
+    var colors = ['#C0392B', '#EC7C3C','#F39C12','#F1C40F','#2ECC71', '#1E8449'];
+    var labels =[];
 
-  //   // Add the minimum and maximum.
-  //   var legendInfo = "<h1>Population with Children<br />(ages 6-17)</h1>" +
-  //     "<div class=\"labels\">" +
-  //       "<div class=\"min\">" + limits[0] + "</div>" +
-  //       "<div class=\"max\">" + limits[limits.length - 1] + "</div>" +
-  //     "</div>";
-
-  //   div.innerHTML = legendInfo;
-
-  //   limits.forEach(function(limit, index) {
-  //     labels.push("<li style=\"background-color: " + colors[index] + "\"></li>");
-  //   });
-
-  //   div.innerHTML += "<ul>" + labels.join("") + "</ul>";
-  //   return div;
-  // };
-
+      // Add the minimum and maximum.
+      var legendInfo = 
+      "<div class=\"labels\">" +
+      "</div>";
+  
+      div.innerHTML = legendInfo;
+  
+      depths.forEach(function(depth, index) {
+        labels.push("<li style=\"background-color: " + colors[index] + "\">" + depth + "</li>");
+      });
+  
+      div.innerHTML += "<ul>" + labels.join("") + "</ul>";
+      return div;
+  };
   // Adding the legend to the map
   legend.addTo(myMap);
 }
